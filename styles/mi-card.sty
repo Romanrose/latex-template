@@ -1,0 +1,13 @@
+%% 3:4 social-card profile. One page becomes one image after PDF conversion.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mi-card}[2026/08/04 Social card output profile]
+
+\RequirePackage{geometry,titlesec}
+\geometry{paperwidth=1080bp,paperheight=1440bp,margin=78bp}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{13bp}
+\linespread{1.18}
+\titleformat{\section}{\fontsize{34}{42}\selectfont\bfseries\color{MIDark}}{}{0pt}{}
+\newcommand{\CardTitle}[1]{\vspace*{25bp}{\fontsize{44}{53}\selectfont\bfseries\color{MIDark}#1\par}\vspace{18bp}\textcolor{MIBrand}{\rule{\linewidth}{2bp}}\vspace{18bp}}
+\newcommand{\CardFooter}[1]{\vfill\textcolor{MIBrand}{\small #1}}
