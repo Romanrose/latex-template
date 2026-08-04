@@ -1,0 +1,26 @@
+\section{典型集：概率质量在哪里？}
+
+对 i.i.d. 随机变量 $X_1,\ldots,X_n$，我们关心一个包含绝大多数样本的集合。选择
+\[
+  g(x)=-\log p(x),
+\]
+大数定律给出
+\[
+  -\frac{1}{n}\log p(X^n) \xrightarrow{P} H(X).
+\]
+
+\begin{definition}[典型集]
+\[
+ A^{(n)}_\epsilon=\left\{x^n:\left| -\frac1n\log p(x^n)-H(X)\right|\leq\epsilon\right\}.
+\]
+\end{definition}
+
+\begin{KeyBox}
+高维分布中，样本通常不会落在密度最高的单点附近；绝大多数概率质量会落在惊奇度接近熵的典型集上。
+\end{KeyBox}
+
+对于高斯分布，这个现象表现为半径接近 $\sqrt n$ 的薄球壳：每个点的密度不最高，但可容纳的体积极大。
+
+\begin{Takeaway}
+寻找“最可能的一个点”和寻找“最可能出现的区域”是两件不同的事。
+\end{Takeaway}

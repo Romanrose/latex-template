@@ -1,0 +1,51 @@
+%% Shared semantic components for all output formats.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mi-core}[2026/08/04 Shared MI components]
+
+\usepackage{iftex}
+\ifPDFTeX
+  \PackageError{mi-core}{Compile with XeLaTeX or LuaLaTeX}{}
+\fi
+
+\usepackage{ctex,fontspec,xcolor}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage[most]{tcolorbox}
+\usepackage{mdframed}
+
+\IfFontExistsTF{Noto Serif CJK SC}
+  {\setCJKmainfont{Noto Serif CJK SC}}
+  {\IfFontExistsTF{Songti SC}{\setCJKmainfont{Songti SC}}{\setCJKmainfont{STSong}}}
+\IfFontExistsTF{TeX Gyre Termes}
+  {\setmainfont{TeX Gyre Termes}}
+  {}
+
+\definecolor{MIBrand}{HTML}{1A9D8F}
+\definecolor{MIInk}{HTML}{1A1A1A}
+\definecolor{MIDark}{HTML}{2F5E58}
+\definecolor{MILight}{HTML}{E8F4F1}
+\definecolor{MIAccent}{HTML}{D94F4F}
+\definecolor{MISoft}{HTML}{F3F8F7}
+\color{MIInk}
+
+\DeclareMathOperator{\Var}{Var}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\MIEmph}[1]{\textcolor{MIBrand}{\textbf{#1}}}
+
+\tcbset{enhanced,breakable,arc=3pt,boxrule=.8pt,left=9pt,right=9pt,top=8pt,bottom=8pt}
+\newtcolorbox{KeyBox}[1][Key idea]{colback=MILight,colframe=MIBrand,
+  colbacktitle=MIDark,coltitle=white,title=\textbf{#1}}
+\newtcolorbox{Takeaway}[1][Takeaway]{colback=MIAccent!10,colframe=MIAccent,
+  colbacktitle=MIAccent,coltitle=white,title=\textbf{#1}}
+\newmdenv[topline=false,bottomline=false,rightline=false,linewidth=4pt,
+  linecolor=MIBrand,backgroundcolor=MISoft,innerleftmargin=10pt,
+  innerrightmargin=10pt,skipabove=6pt,skipbelow=6pt]{SideBar}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{定义}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{注释}

@@ -1,0 +1,25 @@
+\CardTitle{概率最高的点，为什么不是最常出现的？}
+
+在高维空间里，\MIEmph{密度最大}不等于\MIEmph{概率质量最大}。
+
+以高维高斯为例：中心点的密度最高，但随机样本几乎不会停在那里。
+
+\begin{KeyBox}[先记住一句话]
+样本聚集在一个半径接近 $\sqrt n$ 的薄球壳上。
+\end{KeyBox}
+\CardFooter{@romanrose · Math \& Intelligence}
+
+\newpage
+\CardTitle{典型集告诉我们什么？}
+
+对长度为 $n$ 的样本序列：
+\[
+-\frac1n\log p(X^n)\approx H(X).
+\]
+
+也就是说，大多数样本的“惊奇度”都接近平均熵。
+
+\begin{Takeaway}[结论]
+机器学习里的采样、生成与高维几何，都更关心典型区域，而不只是众数。
+\end{Takeaway}
+\CardFooter{第 2 张 · 典型集}
