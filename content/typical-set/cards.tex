@@ -1,25 +1,79 @@
-\CardTitle{概率最高的点，为什么不是最常出现的？}
-
-在高维空间里，\MIEmph{密度最大}不等于\MIEmph{概率质量最大}。
-
-以高维高斯为例：中心点的密度最高，但随机样本几乎不会停在那里。
-
-\begin{KeyBox}[先记住一句话]
-样本聚集在一个半径接近 $\sqrt n$ 的薄球壳上。
-\end{KeyBox}
-\CardFooter{@romanrose · Math \& Intelligence}
+% One card = one idea. Adapt the wording here instead of shrinking a long note.
+\XHSCover{高维概率｜反直觉系列}
+  {最可能的点\newline 不等于最常见的样本}
+  {为什么高维高斯的样本\newline 不在中心，而在一层薄壳上？}
 
 \newpage
-\CardTitle{典型集告诉我们什么？}
+\XHSStart{先猜一猜}{随机样本\newline 最爱待在哪里？}
+\XHSSub{标准高斯分布的密度，中心点最高。\newline 所以样本应该挤在中心？}
+\vspace{14bp}
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+  \fill[XHSPink] (0,0) circle (3.2);
+  \draw[XHSNavy,line width=2bp] (0,0) circle (3.2);
+  \fill[XHSCoral] (0,0) circle (10bp);
+  \node[below=16bp,text=XHSNavy,font=\bfseries] at (0,-3.2) {中心：密度最高};
+  \node[above=4bp,text=white,font=\bfseries\large] at (0,0) {A};
+\end{tikzpicture}
+\end{center}
+\begin{XHSBox}{这个直觉少了一件事}
+一个点的密度再高，也要和它附近\textbf{能容纳多少位置}一起看。
+\end{XHSBox}
+\XHSPage{2}
 
-对长度为 $n$ 的样本序列：
-\[
--\frac1n\log p(X^n)\approx H(X).
-\]
+\newpage
+\XHSStart{答案}{样本大多落在\newline 一层“薄壳”上}
+\begin{center}
+\begin{tikzpicture}[scale=1.28]
+  \fill[XHSMint] (0,0) circle (3.5);
+  \fill[XHSCream] (0,0) circle (2.55);
+  \draw[XHSNavy,line width=2bp] (0,0) circle (3.5);
+  \draw[XHSNavy,line width=2bp] (0,0) circle (2.55);
+  \fill[XHSCoral] (0,0) circle (7bp);
+  \foreach \x/\y in {2.8/1.4,2.1/2.6,.7/3.3,-1.2/3.1,-2.7/1.8,-3.2/.2,-2.5/-2.1,-.7/-3.2,1.4/-2.9,3.1/-1.2} {\fill[XHSCoral] (\x,\y) circle (5bp);}
+  \node[text=XHSNavy,font=\bfseries] at (0,-4.2) {半径约为 $\sqrt n$ 的区域};
+\end{tikzpicture}
+\end{center}
+\begin{XHSMintBox}{高维的关键变化}
+维度变大时，外层空间的体积暴涨；它比中心附近拥有多得多的“座位”。
+\end{XHSMintBox}
+\XHSPage{3}
 
-也就是说，大多数样本的“惊奇度”都接近平均熵。
+\newpage
+\XHSStart{用一句公式说清}{典型样本的\newline “惊奇度”接近熵}
+\vspace{24bp}
+\begin{center}
+{\fontsize{42}{58}\selectfont\color{XHSNavy}
+\[ -\frac{1}{n}\log p(X^n)\approx H(X) \]}
+\end{center}
+\begin{XHSBox}{怎么读这句话？}
+把一个长度为 $n$ 的样本出现概率取负对数、再平均。对绝大多数样本，它都会靠近同一个值：熵 $H(X)$。
+\end{XHSBox}
+\XHSPage{4}
 
-\begin{Takeaway}[结论]
-机器学习里的采样、生成与高维几何，都更关心典型区域，而不只是众数。
-\end{Takeaway}
-\CardFooter{第 2 张 · 典型集}
+\newpage
+\XHSStart{给这个区域起个名字}{它叫\newline “典型集”}
+\XHSSub{典型集不是一个密度最高的小点，而是一个包含\textbf{几乎所有概率质量}的区域。}
+\vspace{20bp}
+\begin{XHSMintBox}{记忆版}
+\textbf{众数}问：哪一个点最显眼？\par
+\textbf{典型集}问：随机样本通常在哪里？
+\end{XHSMintBox}
+\vspace{18bp}
+{\fontsize{38}{48}\selectfont\bfseries\color{XHSCoral}看“区域”，\newline 不只看“最高点”。\par}
+\XHSPage{5}
+
+\newpage
+\XHSStart{最后带走}{高维直觉\newline 的三个改写}
+\begin{XHSBox}{01｜密度不等于概率质量}
+单点高，不代表附近区域能装下多数样本。
+\end{XHSBox}
+\begin{XHSMintBox}{02｜体积在高维里主导一切}
+许多看似“边缘”的区域，反而容纳绝大多数样本。
+\end{XHSMintBox}
+\begin{XHSBox}{03｜生成模型也在寻找典型区域}
+这就是为什么好采样，不是只追逐概率最高的一个答案。
+\end{XHSBox}
+\vfill
+{\fontsize{31}{40}\selectfont\bfseries\color{XHSCoral}收藏这组卡片，\newline 下次遇到高维直觉先想想“薄壳”。\par}
+\XHSPage{6}

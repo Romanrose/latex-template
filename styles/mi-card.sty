@@ -1,13 +1,43 @@
-%% 3:4 social-card profile. One page becomes one image after PDF conversion.
+%% Xiaohongshu-inspired 3:4 social-card profile.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{mi-card}[2026/08/04 Social card output profile]
 
-\RequirePackage{geometry,titlesec}
-\geometry{paperwidth=1080bp,paperheight=1440bp,margin=78bp}
+\RequirePackage{geometry,titlesec,tikz}
+\usetikzlibrary{calc,positioning,shapes.geometric}
+\geometry{paperwidth=1080bp,paperheight=1440bp,margin=76bp}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{13bp}
-\linespread{1.18}
-\titleformat{\section}{\fontsize{34}{42}\selectfont\bfseries\color{MIDark}}{}{0pt}{}
-\newcommand{\CardTitle}[1]{\vspace*{25bp}{\fontsize{44}{53}\selectfont\bfseries\color{MIDark}#1\par}\vspace{18bp}\textcolor{MIBrand}{\rule{\linewidth}{2bp}}\vspace{18bp}}
-\newcommand{\CardFooter}[1]{\vfill\textcolor{MIBrand}{\small #1}}
+\setlength{\parskip}{19bp}
+\linespread{1.08}
+\IfFontExistsTF{PingFang SC}{\setCJKsansfont{PingFang SC}}{\setCJKsansfont{Heiti SC}}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{XHSCream}{HTML}{FFF7EA}
+\definecolor{XHSCoral}{HTML}{F25F5C}
+\definecolor{XHSNavy}{HTML}{163B4A}
+\definecolor{XHSYellow}{HTML}{FFC857}
+\definecolor{XHSMint}{HTML}{B8E3D4}
+\definecolor{XHSPink}{HTML}{FFE0D7}
+
+\AtBeginDocument{\fontsize{25}{34}\selectfont}
+\newcommand{\XHSBrand}{\textcolor{XHSNavy}{\bfseries\small ROMANROSE\,|\,MATH NOTES}}
+\newcommand{\XHSPill}[1]{\tikz[baseline=(label.base)]\node[fill=XHSYellow,text=XHSNavy,rounded corners=7bp,inner xsep=10bp,inner ysep=5bp,font=\bfseries\small] (label) {#1};}
+\newcommand{\XHSPage}[1]{\vfill\noindent\XHSBrand\hfill\textcolor{XHSCoral}{\bfseries #1 / 6}}
+\newcommand{\XHSStart}[2]{%
+  \pagecolor{XHSCream}\color{XHSNavy}\vspace*{30bp}
+  \noindent\XHSPill{#1}\par\vspace{24bp}
+  {\fontsize{62}{72}\selectfont\bfseries #2\par}\vspace{22bp}}
+\newcommand{\XHSBig}[1]{{\fontsize{46}{57}\selectfont\bfseries\color{XHSCoral}#1\par}}
+\newcommand{\XHSSub}[1]{{\fontsize{30}{40}\selectfont\color{XHSNavy!82}#1\par}}
+\newtcolorbox{XHSBox}[2][]{enhanced,breakable,arc=16bp,boxrule=0pt,
+  colback=XHSPink,left=22bp,right=22bp,top=18bp,bottom=18bp,#1,
+  title={\textcolor{XHSCoral}{\bfseries #2}},fonttitle=\large}
+\newtcolorbox{XHSMintBox}[2][]{enhanced,breakable,arc=16bp,boxrule=0pt,
+  colback=XHSMint,left=22bp,right=22bp,top=18bp,bottom=18bp,#1,
+  title={\textcolor{XHSNavy}{\bfseries #2}},fonttitle=\large}
+\newcommand{\XHSCover}[3]{%
+  \pagecolor{XHSCoral}\color{white}\vspace*{54bp}
+  {\color{XHSYellow}\bfseries\fontsize{18}{22}\selectfont #1\par}\vfill
+  {\fontsize{74}{86}\selectfont\bfseries #2\par}\vspace{28bp}
+  {\fontsize{31}{43}\selectfont #3\par}\vfill
+  \noindent\textcolor{XHSCream}{\bfseries ROMANROSE\,|\,MATH NOTES}\hfill\textcolor{XHSYellow}{\bfseries 01}}
