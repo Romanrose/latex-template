@@ -19,9 +19,9 @@
 
 - `templates/notes/book/main.tex`：中文书籍排版示例。
 - `templates/notes/legacy/`：中文、英文、文章、书籍与短笔记起始文件。
-- `builds/book.tex`：6 × 9 英寸书籍示例。
-- `builds/note.tex`：A4 独立笔记示例。
-- `builds/cards.tex`：1080 × 1440 的竖版社媒卡片示例。
+- `templates/notes/adaptive-kit/examples/book.tex`：6 × 9 英寸书籍示例。
+- `templates/notes/adaptive-kit/examples/note.tex`：A4 独立笔记示例。
+- `templates/notes/adaptive-kit/examples/cards.tex`：1080 × 1440 的竖版社媒卡片示例。
 
 ## Provenance
 
@@ -32,4 +32,4 @@ The conference files were collected from locally stored conference Author Kits a
 - Working papers and project copies, including Concept2Fable and AeroDocBench.
 - TeXShop’s built-in templates and stationery, which are application-bundled resources.
 - Generated course exports, dependency folders, caches, PDFs and Word documents.
-- Duplicate copies of styles already represented by the adaptive template at the repository root.
+- Duplicate copies of styles already represented by `templates/notes/adaptive-kit/`.
