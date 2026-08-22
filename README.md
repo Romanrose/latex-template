@@ -4,9 +4,18 @@
 
 ## 目录
 
-- `templates/conferences/`：按会议和年份分类的投稿模板。
-- `templates/notes/`：通用书籍和笔记起始模板。
-- `styles/`、`builds/`、`content/`：自适应笔记、书籍与 3:4 社媒卡片模板（XeLaTeX/LuaLaTeX）。
+```
+templates/
+├── conferences/              # 按会议与年份分类
+│   └── <venue>/<year>/
+└── notes/                    # 非投稿用途的写作模板
+    ├── adaptive-kit/         # XeLaTeX/LuaLaTeX：书籍、笔记、社媒卡片
+    │   ├── content/          # 可复用示例内容
+    │   ├── examples/         # 可直接编译的入口 .tex 文件
+    │   └── styles/           # 版式与颜色等公共样式
+    ├── book/                 # 中文书籍排版起始模板
+    └── legacy/               # 历史文章与短笔记模板
+```
 
 完整清单、入口文件和本机来源记录见 [CATALOG.md](CATALOG.md)。
 
@@ -17,9 +26,10 @@
 3. 自适应模板可用 XeLaTeX 编译：
 
    ```bash
-   xelatex -output-directory=build builds/book.tex
-   xelatex -output-directory=build builds/note.tex
-   xelatex -output-directory=build builds/cards.tex
+   cd templates/notes/adaptive-kit
+   xelatex -output-directory=build examples/book.tex
+   xelatex -output-directory=build examples/note.tex
+   xelatex -output-directory=build examples/cards.tex
    ```
 
 ## 版权与更新
