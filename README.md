@@ -1,35 +1,29 @@
-# Adaptive LaTeX Kit
+# LaTeX Template Collection
 
-一套从同一组知识单元出发，分别输出书籍、独立笔记与 3:4 竖版社媒卡片的 XeLaTeX 模板。
+一个按用途整理的 LaTeX 模板库，包含会议投稿、书籍、笔记和社媒卡片版式。模板保留原有的文件名与发布年份，方便直接复制后开始写作。
 
-## 设计原则
+## 目录
 
-- `styles/mi-core.sty`：跨载体共用的品牌颜色、字体、数学宏与信息盒子。
-- `styles/mi-book.sty`：书籍版式（6 × 9 in、章节、目录、页眉页脚、封面）。
-- `styles/mi-note.sty`：A4 独立笔记版式。
-- `styles/mi-card.sty`：1080 × 1440 的小红书式 3:4 竖版卡片画布，带暖色背景、强标题、信息卡片与页码组件。
-- `content/`：按知识单元保存正文。书籍/笔记可以复用完整推导；卡片版应另行编辑标题、节奏和拆页。
+- `templates/conferences/`：按会议和年份分类的投稿模板。
+- `templates/notes/`：通用书籍和笔记起始模板。
+- `styles/`、`builds/`、`content/`：自适应笔记、书籍与 3:4 社媒卡片模板（XeLaTeX/LuaLaTeX）。
 
-## 编译
+完整清单、入口文件和本机来源记录见 [CATALOG.md](CATALOG.md)。
 
-需要 XeLaTeX 或 LuaLaTeX。以 XeLaTeX 为例：
+## 快速使用
 
-```bash
-xelatex -output-directory=build builds/book.tex
-xelatex -output-directory=build builds/note.tex
-xelatex -output-directory=build builds/cards.tex
-```
+1. 选择 `templates/conferences/<venue>/<year>/` 中的入口 `.tex` 文件，连同同目录的 `.sty`、`.cls`、`.bst` 和 `.bib` 文件一并复制到你的论文目录。
+2. 使用会议官方要求的编译命令与提交规则；提交前请始终核对最新 Author Kit。
+3. 自适应模板可用 XeLaTeX 编译：
 
-卡片生成 PDF 后，可用下列命令导出 1080px 宽的图片：
+   ```bash
+   xelatex -output-directory=build builds/book.tex
+   xelatex -output-directory=build builds/note.tex
+   xelatex -output-directory=build builds/cards.tex
+   ```
 
-```bash
-pdftoppm -png -scale-to-x 1080 -scale-to-y -1 build/cards.pdf output/card
-```
+## 版权与更新
 
-## 从一个主题开始
+本仓库只对目录编排和说明文档作出贡献。会议模板中的 `.tex`、`.sty`、`.cls`、`.bst` 与 `.bib` 文件均保留原始版权和许可；它们不是由本仓库重新授权。使用前请阅读各文件头部说明，并以会议官网最新发布的 Author Kit 为准。
 
-1. 在 `content/<topic>/` 写可复用的定义、公式、证明与结论。
-2. 在 `builds/book.tex` 和 `builds/note.tex` 按需要 `\input` 对应单元。
-3. 在 `content/<topic>/cards.tex` 重新组织为一张卡一个概念；不要把长文硬缩进图片。
-
-示例主题为「典型集」。
+未收录本机中的论文草稿、个人研究项目、课程导出物、应用内置模板及其 PDF/Word 文件，避免混入投稿内容、重复文件或许可不明确的资源。
