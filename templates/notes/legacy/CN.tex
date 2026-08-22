@@ -4,7 +4,7 @@
 
 % ---- 基础排版 ----
 \setmainfont{Times New Roman}
-\setCJKmainfont{FandolSong}
+\IfFontExistsTF{Songti SC}{\setCJKmainfont{Songti SC}}{\setCJKmainfont{FandolSong}}
 \usepackage{microtype,mathtools,bm,physics,enumitem}
 \usepackage{titlesec,setspace,fancyhdr,hyperref,cleveref}
 \setstretch{1.15}
@@ -19,31 +19,25 @@
 \SetKwInput{KwOutput}{Output}
 
 
-% cleveref already loaded earlier (if not):
-\usepackage[capitalize,nameinlink]{cleveref}
-
 % ---- 定理环境 ----
 \definecolor{shadecolor}{rgb}{0.90,0.95,1}
 \definecolor{thmblue}{RGB}{35,116,190}
-\usepackage{tcolorbox,thmtools}
-\declaretheoremstyle[headfont=\bfseries\color{white},
-  headformat=\COLORBOX{thmblue}{\color{white}\thmname{#1}~\thmnumber{#2}},
-  shaded={bgcolor=shadecolor}]{thmbox}
-\declaretheorem[style=thmbox,numberwithin=section]{theorem}
-\declaretheorem[style=thmbox,sibling=theorem]{lemma}
-\declaretheorem[style=thmbox,sibling=theorem]{definition}
+\usepackage[most]{tcolorbox}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
 
 % --- Extra boxes ---
 % 深浅蓝 & 深浅红 统一
 \newtcolorbox{analysisBox}{
   colback=blue!8!white, colframe=blue!60!black,
   coltitle=white, title=Analysis, fonttitle=\bfseries,
-  rounded corners=2pt, boxrule=0.6pt, breakable
+  arc=2pt, boxrule=0.6pt, breakable
 }
 \newtcolorbox{remarkBox}{
   colback=red!8!white,  colframe=red!60!black,
   coltitle=white, title=Remark, fonttitle=\bfseries,
-  rounded corners=2pt, boxrule=0.6pt, breakable
+  arc=2pt, boxrule=0.6pt, breakable
 }
 
 
@@ -96,5 +90,5 @@ Choosing $\varepsilon = 1/4$ balances the two terms and yields the
 optimal $\sqrt{d}$ rate.
 \end{remarkBox}
 
-\printbibliography       % 若使用 biblatex
+% \printbibliography       % 若使用 biblatex
 \end{document}

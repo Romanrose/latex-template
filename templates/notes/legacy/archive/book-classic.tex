@@ -1,3 +1,4 @@
+% Historical book template. Prefer ../../book/main.tex for new work.
 \documentclass[10pt,openany]{book} % 可改 11pt，openright
 
 % ==== Engine ====
@@ -6,15 +7,11 @@
 \ifxetex\else\ifluatex\else
   \errmessage{Please compile with XeLaTeX or LuaLaTeX}
 \fi\fi
-% —— 让 plain 页式复用 fancy 的设置（章/部首页也有同样的页眉页脚）——
-\makeatletter
-\let\ps@plain\ps@fancy
-\makeatother
 % ==== Fonts & Page ====
 \usepackage{ctex,fontspec,geometry,xcolor}
 \geometry{paperwidth=6in,paperheight=9in, margin=0.8in} % 常见 6x9
 \setmainfont{Times New Roman}
-\IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}}{\setCJKmainfont{FandolSong}}
+\IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}}{\IfFontExistsTF{Songti SC}{\setCJKmainfont{Songti SC}}{\setCJKmainfont{FandolSong}}}
 \linespread{1.35}
 \pagecolor{white}\color{black}
 

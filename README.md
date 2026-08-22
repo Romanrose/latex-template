@@ -14,7 +14,10 @@ templates/
     │   ├── examples/         # 可直接编译的入口 .tex 文件
     │   └── styles/           # 版式与颜色等公共样式
     ├── book/                 # 中文书籍排版起始模板
-    └── legacy/               # 历史文章与短笔记模板
+    ├── social/               # 社媒知识内容模板
+    │   └── xhsnote/          # 长图文式中文短笔记
+    └── legacy/               # 保留兼容性的历史模板
+        └── archive/          # 被新版替代的基础文章与旧书籍版
 ```
 
 完整清单、入口文件和本机来源记录见 [CATALOG.md](CATALOG.md)。
@@ -31,6 +34,13 @@ templates/
    xelatex -output-directory=build examples/note.tex
    xelatex -output-directory=build examples/cards.tex
    ```
+
+## 模板选择
+
+- 需要书籍、笔记和竖版卡片三种输出时，优先使用 `notes/adaptive-kit/`。
+- 需要传统中文书籍版式时，使用 `notes/book/`。
+- 需要小红书式长图文笔记时，使用 `notes/social/xhsnote/`。
+- `notes/legacy/` 中的文件保留为兼容参考；`legacy/archive/` 是已由新版替代的历史版本，通常不建议作为新项目起点。
 
 ## 版权与更新
 

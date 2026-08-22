@@ -25,10 +25,10 @@
 \IfFontExistsTF{Times New Roman}
   {\setmainfont{Times New Roman}}
   {\setmainfont{TeX Gyre Termes}}
-% 中文主字体：首选 Noto Serif CJK SC，不在则回退到 TeX Live 常见的 FandolSong
+% 中文主字体：优先使用 Noto，其次采用 macOS 自带宋体，再回退到 FandolSong
 \IfFontExistsTF{Noto Serif CJK SC}
   {\setCJKmainfont{Noto Serif CJK SC}}
-  {\setCJKmainfont{FandolSong}}
+  {\IfFontExistsTF{Songti SC}{\setCJKmainfont{Songti SC}}{\setCJKmainfont{FandolSong}}}
 \linespread{1.35} % 行距（适合书籍）
 \pagecolor{white}\color{black} % 纸张/文本颜色
 

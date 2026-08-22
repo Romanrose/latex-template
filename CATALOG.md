@@ -17,11 +17,13 @@
 
 ## Notes and books
 
-- `templates/notes/book/main.tex`：中文书籍排版示例。
-- `templates/notes/legacy/`：中文、英文、文章、书籍与短笔记起始文件。
 - `templates/notes/adaptive-kit/examples/book.tex`：6 × 9 英寸书籍示例。
 - `templates/notes/adaptive-kit/examples/note.tex`：A4 独立笔记示例。
 - `templates/notes/adaptive-kit/examples/cards.tex`：1080 × 1440 的竖版社媒卡片示例。
+- `templates/notes/book/main.tex`：传统中文书籍排版的推荐起始模板。
+- `templates/notes/social/xhsnote/example.tex`：小红书式长图文中文短笔记；依赖同目录的 `xhsnote-template.sty`。
+- `templates/notes/legacy/CN.tex`、`EN.tex` 与 `article-enhanced.tex`：保留的中英文与增强文章排版参考。
+- `templates/notes/legacy/archive/article-basic.tex`、`book-classic.tex`：被增强文章模板和 `notes/book/` 替代的历史版本，仅作归档参考。
 
 ## Provenance
 

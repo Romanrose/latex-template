@@ -1,3 +1,4 @@
+% Historical basic article template. Prefer ../article-enhanced.tex for new work.
 \documentclass[12pt]{article} % 也支持 14pt/17pt/20pt
 
 % ==== Engine ====
@@ -14,40 +15,25 @@
 \IfFontExistsTF{Noto Serif CJK SC}{
   \setCJKmainfont{Noto Serif CJK SC}
 }{
-  \setCJKmainfont{FandolSong}
+  \IfFontExistsTF{Songti SC}{\setCJKmainfont{Songti SC}}{\setCJKmainfont{FandolSong}}
 }
 \linespread{1.4}
 \pagecolor{white}\color{black}
 
 % ==== Colors ====
-\definecolor{brand}{HTML}{1A9D8F}      % teal
-\definecolor{brandD}{HTML}{2A7F6F}     % dark teal
+\definecolor{brand}{HTML}{1A9D8F}
+\definecolor{brandD}{HTML}{2A7F6F}
 \definecolor{ink}{HTML}{1A1A1A}
-\definecolor{keybg}{HTML}{E8F4F1}      % light teal bg
-\definecolor{keydark}{HTML}{2F5E58}    % dark teal text
+\definecolor{keybg}{HTML}{E8F4F1}
+\definecolor{keydark}{HTML}{2F5E58}
 \definecolor{accent}{HTML}{FF6B6B}
-\definecolor{accentD}{HTML}{D94F4F}    % strong red
+\definecolor{accentD}{HTML}{D94F4F}
 \definecolor{soft}{HTML}{F3F8F7}
 \definecolor{xhsRed}{HTML}{FF4D4F}
 \definecolor{xhsDark}{HTML}{1F1F1F}
 \definecolor{xhsCream}{HTML}{FFF8F0}
 \definecolor{xhsBlue}{HTML}{2F54EB}
 \definecolor{xhsYellow}{HTML}{FFB800}
-
-% for theorem color themes
-\definecolor{secblue}{HTML}{2B44C6}          % deep blue
-\definecolor{thmBg}{RGB}{235,245,255}        % light blue background for Theorem
-\definecolor{lemBg}{RGB}{255,240,240}        % light warm pink for Lemma
-\definecolor{defBg}{RGB}{232,244,241}        % same as keybg-ish for Definition
-% borders (left bars)
-\colorlet{thmBar}{secblue}      % theorem left bar = blue
-\colorlet{lemBar}{accentD}      % lemma left bar = red
-\colorlet{defBar}{brand}        % definition left bar = teal
-
-% highlight helpers
-\definecolor{error}{HTML}{E53935}      % 错误/存疑红
-\definecolor{info}{HTML}{64B5F6}       % 信息提示蓝
-\definecolor{termblue}{HTML}{1A4C9A}   % 专业名词深蓝
 
 % ==== Date macro ====
 \newcommand{\padzero}[1]{\ifnum#1<10 0\fi\number#1}
@@ -124,104 +110,23 @@
 \DeclareMathOperator{\Var}{Var}
 \newcommand{\E}{\mathbb{E}}
 
+% Shaded theorem 外框（可选）
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{235,245,255}
+\newenvironment{ShadedTheorem}[1][]{%
+  \begin{shaded}\begin{theorem}[#1]}{\end{theorem}\end{shaded}}
+
 % 定理样式 & 按 section 编号
 \newtheoremstyle{customthm}{0.8em}{0.8em}{\itshape}{}{\bfseries}{.}{0.5em}{}
 \newtheoremstyle{customdef}{0.8em}{0.8em}{}{}{\bfseries}{.}{0.5em}{}
-
 \theoremstyle{customthm}
 \newtheorem{theorem}{定理}[section]
 \newtheorem{lemma}[theorem]{引理}
-
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
 \theoremstyle{customdef}
 \newtheorem{definition}[theorem]{定义}
-
-% --- tcolorbox-wrapped theorem-like envs ---
-% 目标：
-% - theorems: 蓝条/蓝淡底 (secblue / thmBg)
-% - lemmas:   红条/暖粉底 (accentD / lemBg)
-% - defs:     绿条/浅绿底 (brand / defBg)
-%
-% 统一风格：
-%   左侧2pt彩条、圆角2pt、内边距一致、标题自动加粗
-%   可选标题 [] 为空则不显示括号
-
-% Theorem
-\let\oldtheorem\theorem
-\let\endoldtheorem\endtheorem
-\renewenvironment{theorem}[1][]{%
-  \begin{tcolorbox}[
-    enhanced,
-    breakable,
-    colback=thmBg,
-    colframe=thmBar,
-    boxrule=0pt,
-    borderline west={2pt}{0pt}{thmBar},
-    sharp corners,
-    arc=2pt,
-    left=10pt,right=10pt,top=8pt,bottom=8pt,
-    before skip=10pt,after skip=10pt
-  ]%
-  \if\relax\detokenize{#1}\relax
-    \begin{oldtheorem}\itshape
-  \else
-    \begin{oldtheorem}[\textbf{#1}]\itshape
-  \fi
-}{%
-    \end{oldtheorem}%
-  \end{tcolorbox}%
-}
-
-% Lemma
-\let\oldlemma\lemma
-\let\endoldlemma\endlemma
-\renewenvironment{lemma}[1][]{%
-  \begin{tcolorbox}[
-    enhanced,
-    breakable,
-    colback=lemBg,
-    colframe=lemBar,
-    boxrule=0pt,
-    borderline west={2pt}{0pt}{lemBar},
-    sharp corners,
-    arc=2pt,
-    left=10pt,right=10pt,top=8pt,bottom=8pt,
-    before skip=10pt,after skip=10pt
-  ]%
-  \if\relax\detokenize{#1}\relax
-    \begin{oldlemma}\itshape
-  \else
-    \begin{oldlemma}[\textbf{#1}]\itshape
-  \fi
-}{%
-    \end{oldlemma}%
-  \end{tcolorbox}%
-}
-
-% Definition
-\let\olddefinition\definition
-\let\endolddefinition\enddefinition
-\renewenvironment{definition}[1][]{%
-  \begin{tcolorbox}[
-    enhanced,
-    breakable,
-    colback=defBg,
-    colframe=defBar,
-    boxrule=0pt,
-    borderline west={2pt}{0pt}{defBar},
-    sharp corners,
-    arc=2pt,
-    left=10pt,right=10pt,top=8pt,bottom=8pt,
-    before skip=10pt,after skip=10pt
-  ]%
-  \if\relax\detokenize{#1}\relax
-    \begin{olddefinition}\itshape
-  \else
-    \begin{olddefinition}[\textbf{#1}]\itshape
-  \fi
-}{%
-    \end{olddefinition}%
-  \end{tcolorbox}%
-}
+\newtheorem{remark}[theorem]{注释}
 
 % ==== 章节机制（自定义章号/章题，仅影响编号显示） ====
 \newcounter{chapter}
@@ -234,10 +139,8 @@
 \renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
 \newcommand{\ChapterHeading}{%
   \vspace*{0.6cm}
-  {\centering
-    {\fontsize{26pt}{28pt}\selectfont\bfseries\color{keydark}
-      第\arabic{chapter}章\ \ChapterTitle\par}
-  }%
+  {\fontsize{26pt}{28pt}\selectfont\bfseries\color{keydark}
+   第\arabic{chapter}章\ \ChapterTitle\par}
   \vspace{0.6cm}
 }
 \newcommand{\BeginChapter}[2]{%
@@ -246,7 +149,17 @@
   \ChapterHeading
 }
 
-
+% ==== Remark（非盒子风） ====
+\newenvironment{RemarkNote}[1][]{%
+  \par\smallskip
+  \noindent{\bfseries\color{accentD}Remark}%
+  \ifx\relax#1\relax\else{\bfseries\color{accentD} \ (#1)}\fi
+  \ .\ %
+}{%
+  \par\smallskip
+  {\color{ink!60}\rule{\linewidth}{0.4pt}}
+  \smallskip
+}
 
 % ==== Example 盒子 ====
 \definecolor{exframe}{HTML}{6C5CE7}
@@ -261,7 +174,7 @@
   breakable, #1
 }
 
-% ==== 证明环境（保持你的样式） ====
+% ==== 证明环境 ====
 \renewenvironment{proof}[1][证明]{\par
   \pushQED{\qed}%
   \normalfont \topsep6pt \partopsep0pt
@@ -269,87 +182,68 @@
   \item[\hskip\labelsep\bfseries #1.]\ignorespaces
 }{\popQED\endtrivlist}
 
-
-
-% ==== 高亮系统（自动换行友好版） ====
-% ==== 高亮系统 ====
-\usepackage{xcolor,tikz}
-\newcommand{\hltext}[2][yellow!30]{%
-  \tikz[baseline=(X.base)] \node[rectangle, rounded corners=2pt,
-  fill=#1, inner sep=2pt, anchor=base] (X) {#2};%
+% ==== 系列导航卡（页末信息块，可选） ====
+\newcommand{\SeriesCardEnd}[3]{%
+  \vspace{1.4em}\noindent
+  \setlength{\fboxsep}{8pt}\setlength{\fboxrule}{0.8pt}%
+  \fcolorbox{brand}{soft}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+      \textbf{集中不等式系列 · 第 #1 篇}\par
+      \vspace{0.3em}%
+      \noindent
+      \begin{minipage}[t]{0.49\linewidth}\raggedright
+        \textit{上一篇：}#2
+      \end{minipage}\hfill
+      \begin{minipage}[t]{0.49\linewidth}\raggedleft
+        \textit{下一篇：}#3
+      \end{minipage}%
+    }%
+  }%
 }
 
-
-
-% ==== Semantic Shortcuts ====
-\newcommand{\KeyIdea}[1]{\hltext[keybg]{\textbf{#1}}}            % 关键想法：浅绿底
-\newcommand{\Term}[1]{\textcolor{termblue}{\textbf{#1}}}           % 专业名词：品牌深绿字
-\newcommand{\Emph}[1]{\textcolor{accentD}{\textbf{#1}}}          % 强调词汇：红
-\newcommand{\Confuse}[1]{\hltext[error!20]{\textcolor{error}{#1}}} % 不懂/存疑处
-
-\newcommand{\Info}[1]{\textcolor{info!90!black}{#1}}             % 说明或注解
-%一侧笔记
 % =========================
 % ======== 文档开始 ========
 % =========================
 \begin{document}
 
-% 设定章号
+% ====== 使用示例（请按需替换/删除） ======
+% 设定章号与章标题（可选打印大标题）
 \setchapter{1}{示例章标题}
-\ChapterHeading
+%\ChapterHeading            % 如不想显示章标题，可注释本行
 
 \section{xx不等式}
-
 \begin{SideBar}
 \textbf{背景/引言/要解决的问题}
 \end{SideBar}
-
 \subsection{预备知识}
 
-\begin{definition}[随机变量的集中]
-设 $X$ 为随机变量。我们说 $X$ 满足集中，如果它的偏差概率呈指数级衰减。
+\begin{definition}[示例定义]
+这是一个示例定义。\par
 \end{definition}
+\begin{ShadedTheorem}[示例定理]
+    这是一个示例定理陈述。
+\end{ShadedTheorem}
 
-\begin{lemma}[子高斯性质]
-若 $X$ 是次高斯，则对一切 $\lambda \in \mathbb{R}$ 有
-\[
-\mathbb{E}\big[e^{\lambda X}\big]
-\le
-\exp\!\left(\frac{\lambda^2\sigma^2}{2}\right).
-\]
-\end{lemma}
-
-\begin{theorem}[Hanson--Wright 型]
-对独立次高斯向量 $X$，二次型 $X^\top A X$ 具有指数尾界。
-\end{theorem}
 
 \begin{proof}
 这里是证明思路……
 \end{proof}
+\begin{RemarkNote}
+    发现的奇妙的东西
+\end{RemarkNote}
+\begin{KeyBox}
+关键想法要点总结……
+\end{KeyBox}
 
-\begin{Example}
-    这是一个栗子
-\end{Example}
-
-
-
-\KeyIdea{尾部指数衰减} $\Rightarrow$ \Emph{大偏差极少发生} $\Rightarrow$ 高维统计的稳定性。
-
-\Info{直觉：如果随机变量的尾部概率下降得足够快，即使我们在高维空间中做成千上万次尝试，仍几乎不可能遇到极端值。}
-
-
-\Info{在高维统计中，我们常用 \Term{Hoeffding 不等式} 或 \Term{Bernstein 不等式} 来刻画这种指数尾。它们保证样本均值 $\bar X$ 满足}
-\[
-\Pr(|\bar X - \E[X]| \ge t) \le 2 e^{-c n t^2/\sigma^2}.
-\]
-
-\Confuse{为什么 mgf 上界能推出尾界？}
-
-
+\begin{Takeaway}
+简要总结内容
+\end{Takeaway}
 
 \section*{参考文献}
 \begin{enumerate}
   \item Rudelson, M.\ \& Vershynin, R. (2013). Hanson--Wright inequality and sub-gaussian concentration. \textit{Electronic Communications in Probability}, 18, 1--9.
 \end{enumerate}
+% 页末信息块（可选）
+%\SeriesCardEnd{I}{上一篇标题}{下一篇标题}
 
 \end{document}
