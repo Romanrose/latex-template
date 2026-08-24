@@ -22,6 +22,10 @@ templates/
 
 完整清单、入口文件和本机来源记录见 [CATALOG.md](CATALOG.md)。
 
+## 延伸案例库
+
+[Beautiful Data Viz](beautiful-dataviz/) 是仓库内独立维护的可视化设计案例库，收录数据新闻、地图、Dashboard、数据艺术与开源实现的拆解笔记。它不包含 LaTeX 模板，也不转载原作素材。
+
 ## 快速使用
 
 1. 选择 `templates/conferences/<venue>/<year>/` 中的入口 `.tex` 文件，连同同目录的 `.sty`、`.cls`、`.bst` 和 `.bib` 文件一并复制到你的论文目录。
